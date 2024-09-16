@@ -272,4 +272,12 @@ float readTemperature() {
    
 ---
 
-This project will help ensure that your vegetable hydroponics system remains healthy and productive with minimal manual effort.
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+---
