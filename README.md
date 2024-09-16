@@ -9,7 +9,7 @@
 - [Software Requirements](#software-requirements)
 - [Installation and Setup](#installation-and-setup)
 - [Code Explanation](#code-explanation)
-- [Circuit Layout](#Basic-Circuit-Layout)
+- [Circuit Layout](#basic-circuit-layout)
 - [How to Use](#how-to-use)
 - [Troubleshooting](#troubleshooting)
 - [Future Improvements](#future-improvements)
@@ -149,6 +149,7 @@ Arduino UNO:
 +-------------------+
 ```
 
+---
 
 
 ### Code Explanation
@@ -209,6 +210,7 @@ float readTemperature() {
   return sensors.getTempCByIndex(0);
 }
 ```
+---
 
 ### How to Use
 
