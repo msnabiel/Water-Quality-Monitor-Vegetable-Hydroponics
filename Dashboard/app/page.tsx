@@ -223,7 +223,7 @@ const HydroponicDashboard = () => {
           <div className="flex w-full items-start gap-2 text-sm">
             <div className="grid gap-2">
               <div className="flex items-center gap-2 font-medium leading-none">
-                Sensors Hydroponics Project <LeafIcon className="h-4 w-4" />
+                Sensors Hydroponics Project <LeafIcon  className="h-4 w-4" />
               </div>
               <div className="flex items-center gap-2 leading-none text-muted-foreground">
                 November 2024
@@ -237,7 +237,7 @@ const HydroponicDashboard = () => {
       <Card className="mt-6">
         <CardHeader>
           <CardTitle className="text-center">Anomalies & Forecasting</CardTitle>
-          <CardDescription className="text-center">Anomaly detection for TDS and Bio-ExG, and forecasts for TDS and Water Level</CardDescription>
+          <CardDescription className="text-center">Anomaly detection (Z-Score) for TDS and Bio-ExG, and forecasts (Linear Regression) for TDS and Water Level</CardDescription>
         </CardHeader>
         <CardContent>
           <h3 className="text-left font-bold">Anomaly Detection (Z-Score)</h3>
@@ -256,6 +256,18 @@ const HydroponicDashboard = () => {
             </div>
           </div>
         </CardContent>
+        <CardFooter>
+          <div className="flex w-full items-start gap-2 text-sm">
+            <div className="grid gap-2">
+              <div className="flex items-center gap-2 font-medium leading-none">
+                Sensors Hydroponics Project <LeafIcon  className="h-4 w-4" />
+              </div>
+              <div className="flex items-center gap-2 leading-none text-muted-foreground">
+                November 2024
+              </div>
+            </div>
+          </div>
+        </CardFooter>
       </Card>
       
       <div className="flex flex-col items-center justify-center gap-4 p-8">
