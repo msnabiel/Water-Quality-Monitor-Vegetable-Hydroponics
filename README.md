@@ -1,283 +1,112 @@
-# Monitoring Water Quality in Vegetable Hydroponics using Arduino Microcontroller
+# Hydroponic Plant Monitoring System
 
+This project is designed to monitor and optimize the growing conditions of a hydroponic system, focusing on critical factors like water quality, pH levels, and environmental data. The system integrates various sensors (TDS, ultrasonic level, and Bio-ExG) with real-time data collection, anomaly detection, forecasting, and a user-friendly dashboard.
 
-#### Table of Contents
-- [Introduction](#introduction)
-- [Components Required](#components-required)
-- [System Overview](#system-overview)
-- [Sensors and Hardware Setup](#sensors-and-hardware-setup)
-- [Software Requirements](#software-requirements)
-- [Installation and Setup](#installation-and-setup)
-- [Code Explanation](#code-explanation)
-- [Circuit Layout](#basic-circuit-layout)
-- [How to Use](#how-to-use)
-- [Troubleshooting](#troubleshooting)
-- [Future Improvements](#future-improvements)
-- [References](#references)
+## Features
 
----
+- **Real-Time Monitoring**: Continuously tracks the water quality, TDS values, water level, and Bio-ExG sensor data.
+- **Anomaly Detection**: Identifies abnormal values such as sudden changes in TDS or water level and alerts the user.
+- **Forecasting**: Predicts the plant's growth environment using historical data trends.
+- **User-Friendly Dashboard**: Provides an easy-to-navigate web interface for monitoring sensor data and system status in real-time.
+- **Water Quality & Level Management**: Ensures optimal water quality and levels for maximum plant growth.
 
-### Introduction
+## Components
 
-This project monitors the water quality in a vegetable hydroponics system using an Arduino microcontroller. It measures key water parameters such as pH level, temperature, and electrical conductivity (EC), helping you maintain an optimal environment for plant growth. The real-time data is displayed on an LCD screen, and optional features include data logging and alerts.
+- **Arduino Uno**: Central microcontroller for sensor integration and data collection.
+- **TDS Sensor**: Measures the total dissolved solids in the water to assess water quality.
+- **Ultrasonic Level Sensor**: Monitors the water level in the hydroponic tank.
+- **Bio-ExG Sensor**: Measures the bioelectrical signals of the plants.
+- **Relay Module**: Controls the water pump for irrigation based on water level readings.
 
----
+## Installation
 
-### Components Required
+### Hardware Setup
 
-- **Arduino UNO** (or any other compatible board)
-- **pH sensor** (Analog)
-- **Temperature sensor** (DS18B20 or DHT11)
-- **EC sensor** (Electrical Conductivity)
-- **LCD Display** (16x2 or 20x4 with I2C module)
-- **Breadboard & Jumper Wires**
-- **Resistors and Capacitors** (optional for signal stability)
-- **Power Supply** (5V or USB)
-- **Optional**: SD card module for data logging, buzzer/LED for alerts
+1. **Arduino Uno Setup**:
+   - Connect the TDS sensor to pin `A0`.
+   - Connect the ultrasonic sensor's Trigger and Echo pins to pins `12` and `11`, respectively.
+   - Connect the Bio-ExG sensor to pin `A1`.
+   - Connect the relay module for the pump to pin `8`.
 
----
+2. **Relay and Pump Setup**:
+   - Use a 12V or 5V pump and relay module to manage the water pump.
+   - Ensure that the pump and relay are connected according to the specifications of your components.
 
-### System Overview
+### Software Setup
 
-The Arduino will collect water quality data from the sensors and display the readings on an LCD screen. The system can monitor the following parameters:
-- **pH**: Measures the acidity or alkalinity of the water.
-- **Temperature**: Ensures optimal temperature conditions for plant growth.
-- **EC (Electrical Conductivity)**: Measures the nutrient concentration in the water.
-
-This system can help you automate the monitoring process, ensuring that the water conditions are always ideal for your hydroponic setup.
-
----
-
-### Sensors and Hardware Setup
-
-1. **pH Sensor:**
-   - Connect the pH sensor's analog output to one of the Arduino's analog pins (e.g., A0).
-   - Calibrate the sensor using pH buffer solutions before deployment.
+1. **Arduino Code**: 
+   - Upload the provided Arduino sketch to the Arduino Uno using the Arduino IDE.
    
-2. **Temperature Sensor (DS18B20):**
-   - Use a digital pin (e.g., D2) to connect the temperature sensor.
-   - Ensure the sensor is waterproof if placed in the water.
-
-3. **EC Sensor:**
-   - Connect the EC sensor to another analog pin (e.g., A1).
-   - Calibrate using a solution with known conductivity for accuracy.
-
-4. **LCD Display:**
-   - Connect the I2C module to the Arduino (SDA to A4, SCL to A5).
-   - Alternatively, use parallel connections if not using an I2C module.
-
----
-
-### Software Requirements
-
-- **Arduino IDE** (version 1.8 or higher)
-- **pH Sensor library** (if required)
-- **OneWire and DallasTemperature libraries** (for DS18B20)
-- **LiquidCrystal_I2C library** (for LCD display)
-- **EC sensor calibration code** (optional, based on your sensor)
-
----
-
-### Installation and Setup
-
-1. **Install Arduino IDE:**
-   Download and install the Arduino IDE from [here](https://www.arduino.cc/en/software).
-
-2. **Install Necessary Libraries:**
-   - Open Arduino IDE.
-   - Go to **Sketch > Include Library > Manage Libraries**.
-   - Install the following libraries:
-     - `OneWire`
-     - `DallasTemperature`
-     - `LiquidCrystal_I2C`
-
-3. **Connect the Hardware:**
-   - Follow the hardware setup mentioned above to connect the sensors and display.
-
-4. **Upload the Code:**
-   - Connect your Arduino to your PC via USB.
-   - Open the `.ino` code file in Arduino IDE.
-   - Select the correct board (Arduino UNO) and port under **Tools > Board** and **Tools > Port**.
-   - Upload the code by clicking on the upload button.
-
----
-
-### Circuit Layout
-
-1. **pH Sensor**:
-   - **VCC** → Arduino **5V**
-   - **GND** → Arduino **GND**
-   - **Signal (Analog Out)** → Arduino **A0**
-
-2. **EC Sensor**:
-   - **VCC** → Arduino **5V**
-   - **GND** → Arduino **GND**
-   - **Signal (Analog Out)** → Arduino **A1**
-
-3. **DS18B20 Temperature Sensor**:
-   - **VCC** → Arduino **5V**
-   - **GND** → Arduino **GND**
-   - **Data** → Arduino **Pin 2**
-   - **10kΩ resistor** between **Data** and **VCC**
-
-4. **16x2 LCD with I2C Module**:
-   - **VCC** → Arduino **5V**
-   - **GND** → Arduino **GND**
-   - **SDA** → Arduino **A4**
-   - **SCL** → Arduino **A5**
-
----
-
-### Basic Circuit Layout
-
+2. **Frontend and Backend Setup**:
+   
+   #### Clone the repository:
 ```
-Arduino UNO:
-
-+-------------------+                     +-----------+
-|                   |                     |           |
-|  A0 (pH Sensor)    |<------------------> |  pH Sensor|
-|  A1 (EC Sensor)    |<------------------> |  EC Sensor|
-|                   |                     |           |
-|  Pin 2 (Temp)      |<------------------> |  DS18B20  |
-|                   |                     | (Temp Sensor)
-|                   |                     +-----------+
-|  A4 (SDA)          |<------------------> |  LCD I2C  |
-|  A5 (SCL)          |<------------------> |  Display  |
-|                   |                     +------------+
-|  5V                |<------------------> Power (All Sensors)
-|  GND               |<------------------> Ground (All Sensors)
-+-------------------+
+git clone https://github.com/msnabiel/Water-Quality-Monitor-Vegetable-Hydroponics.git
+cd Water-Quality-Monitor-Vegetable-Hydroponics
 ```
 
----
+#### Backend (Node.js Setup):
 
+- Navigate to the `dashboard` folder:
 
-### Code Explanation
+  ```
+  cd dashboard
+  ```
 
-```cpp
-#include <Wire.h>
-#include <LiquidCrystal_I2C.h>
-#include <OneWire.h>
-#include <DallasTemperature.h>
+- Install dependencies:
 
-// Pin configurations
-#define PH_PIN A0
-#define EC_PIN A1
-#define TEMPERATURE_PIN 2
+  ```
+  npm install
+  ```
 
-LiquidCrystal_I2C lcd(0x27, 16, 2);
-OneWire oneWire(TEMPERATURE_PIN);
-DallasTemperature sensors(&oneWire);
+- Start the backend server:
 
-void setup() {
-  lcd.begin(16, 2);
-  lcd.backlight();
-  
-  sensors.begin();  // Start temperature sensor
-  lcd.print("Initializing...");
-  delay(2000);
-}
+  ```
+  node server.js
+  ```
 
-void loop() {
-  float phValue = readPH();
-  float ecValue = readEC();
-  float tempValue = readTemperature();
-  
-  lcd.clear();
-  lcd.setCursor(0, 0);
-  lcd.print("pH: ");
-  lcd.print(phValue);
-  
-  lcd.setCursor(0, 1);
-  lcd.print("EC: ");
-  lcd.print(ecValue);
-  
-  delay(5000);
-}
+#### Frontend (React Setup):
 
-float readPH() {
-  // Add code to read and return the pH value
-  return analogRead(PH_PIN) * (5.0 / 1023.0);  // Placeholder
-}
+- Navigate to the `dashboard` folder:
 
-float readEC() {
-  // Add code to read and return the EC value
-  return analogRead(EC_PIN) * (5.0 / 1023.0);  // Placeholder
-}
+  ```
+  cd dashboard
+  ```
 
-float readTemperature() {
-  sensors.requestTemperatures(); 
-  return sensors.getTempCByIndex(0);
-}
-```
----
+- Install dependencies:
 
-### How to Use
+  ```
+  npm install
+  ```
 
-1. **Power the System:**
-   Plug in the Arduino to a power source (USB or external).
+- Start the React development server:
 
-2. **Display Monitoring:**
-   View real-time water quality readings on the LCD screen.
+  ```
+  npm run dev
+  ```
 
-3. **Calibration:**
-   Calibrate the sensors as per the manufacturer's instructions for accurate readings.
+The frontend dashboard will be accessible at [http://localhost:3000](http://localhost:3000), and the backend WebSocket server will be running on [http://localhost:8080](http://localhost:8080).
 
-4. **Data Logging (Optional):**
-   Add an SD card module and modify the code to log data to an SD card for historical analysis.
+## Usage
 
----
+- **Real-Time Data**: The dashboard will display real-time sensor data such as TDS value, water level, and pump status.
+- **Pump Control**: The pump is controlled based on the water level detected by the ultrasonic sensor. The relay will automatically turn the pump on or off as needed.
 
-### Troubleshooting
+## Technologies Used
 
-- **Incorrect Sensor Readings:**
-  - Double-check wiring connections and sensor calibration.
-  - Ensure the sensors are compatible with Arduino analog and digital inputs.
-  
-- **LCD Display Issues:**
-  - Verify that the correct I2C address is used for the LCD.
-  - Ensure the I2C connections (SDA and SCL) are properly made.
+- **Arduino IDE**: For programming the Arduino.
+- **Node.js**: Backend for communication between Arduino and frontend.
+- **WebSocket**: Real-time data transmission.
+- **React.js**: Frontend for the user dashboard.
+- **Chart.js**: For visualizing sensor data on the dashboard.
 
-- **No Temperature Reading:**
-  - Check the connection of the temperature sensor and ensure that the OneWire and DallasTemperature libraries are correctly installed.
+## Future Enhancements
 
----
-
-### Future Improvements
-
-- Add Wi-Fi connectivity using an ESP8266 module for remote monitoring.
-- Implement alerts using a buzzer or LEDs for abnormal water conditions.
-- Incorporate a mobile app for live data viewing and notifications.
-
----
-
-### References
-
-1. **Arduino Official Website**: [https://www.arduino.cc](https://www.arduino.cc)
-2. **pH Sensor Documentation**:
-   - If you are using a standard analog pH sensor, like the **Gravity Analog pH Sensor**, the documentation can be found here:
-     - [Gravity pH Sensor Documentation](https://wiki.dfrobot.com/Gravity__Analog_pH_Sensor_Meter_Kit_V2_SKU__SEN0161_V2)
-   
-3. **EC (Electrical Conductivity) Sensor Documentation**:
-   - For the **Gravity Analog Electrical Conductivity Meter**, you can refer to the following:
-     - [Gravity EC Sensor Documentation](https://wiki.dfrobot.com/Analog_EC_Meter_SKU__SEN0169)
-   
-4. **DS18B20 Temperature Sensor Documentation**:
-   - The **DS18B20 Waterproof Digital Temperature Sensor** has detailed documentation here:
-     - [DS18B20 Sensor Documentation](https://datasheets.maximintegrated.com/en/ds/DS18B20.pdf)
-   
-5. **LCD Display with I2C Module Documentation**:
-   - For connecting and using the I2C 16x2 LCD with Arduino, refer to:
-     - [I2C LCD Documentation](https://lastminuteengineers.com/i2c-lcd-arduino-tutorial/)
-   
----
+- **pH Monitoring**: Add a pH sensor to track the acidity of the water.
+- **More Sensors**: Integrate environmental sensors like temperature, humidity, and light.
+- **Mobile App**: Develop a mobile version of the dashboard for remote monitoring.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License.
 
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
----
