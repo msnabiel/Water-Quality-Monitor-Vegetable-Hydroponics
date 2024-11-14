@@ -52,9 +52,10 @@ This project is designed to monitor and optimize the growing conditions of a hyd
    
 2. **Frontend and Backend Setup**:
    
-   #### Clone the repository: ```
-git clone https://github.com/msnabiel/Water-Quality-Monitor-Vegetable-Hydroponics.git
-cd Water-Quality-Monitor-Vegetable-Hydroponics
+   #### Clone the repository: 
+```
+   git clone https://github.com/msnabiel/Water-Quality-Monitor-Vegetable-Hydroponics.git
+   cd Water-Quality-Monitor-Vegetable-Hydroponics
 ```
 
 #### Backend (Node.js Setup):
