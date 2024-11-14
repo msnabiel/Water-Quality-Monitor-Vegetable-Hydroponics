@@ -17,6 +17,19 @@ This project is designed to monitor and optimize the growing conditions of a hyd
 - **Ultrasonic Level Sensor**: Monitors the water level in the hydroponic tank.
 - **Bio-ExG Sensor**: Measures the bioelectrical signals of the plants.
 - **Relay Module**: Controls the water pump for irrigation based on water level readings.
+## Usage
+
+- **Real-Time Data**: The dashboard will display real-time sensor data such as TDS value, water level, and pump status.
+- **Pump Control**: The pump is controlled based on the water level detected by the ultrasonic sensor. The relay will automatically turn the pump on or off as needed.
+
+## Technologies Used
+
+- **Arduino IDE**: For programming the Arduino.
+- **Node.js**: Backend for communication between Arduino and frontend.
+- **WebSocket**: Real-time data transmission.
+- **React.js**: Frontend for the user dashboard.
+- **Chart.js**: For visualizing sensor data on the dashboard.
+
 
 ## Installation
 
@@ -39,8 +52,7 @@ This project is designed to monitor and optimize the growing conditions of a hyd
    
 2. **Frontend and Backend Setup**:
    
-   #### Clone the repository:
-```
+   #### Clone the repository: ```
 git clone https://github.com/msnabiel/Water-Quality-Monitor-Vegetable-Hydroponics.git
 cd Water-Quality-Monitor-Vegetable-Hydroponics
 ```
@@ -86,20 +98,6 @@ cd Water-Quality-Monitor-Vegetable-Hydroponics
   ```
 
 The frontend dashboard will be accessible at [http://localhost:3000](http://localhost:3000), and the backend WebSocket server will be running on [http://localhost:8080](http://localhost:8080).
-
-## Usage
-
-- **Real-Time Data**: The dashboard will display real-time sensor data such as TDS value, water level, and pump status.
-- **Pump Control**: The pump is controlled based on the water level detected by the ultrasonic sensor. The relay will automatically turn the pump on or off as needed.
-
-## Technologies Used
-
-- **Arduino IDE**: For programming the Arduino.
-- **Node.js**: Backend for communication between Arduino and frontend.
-- **WebSocket**: Real-time data transmission.
-- **React.js**: Frontend for the user dashboard.
-- **Chart.js**: For visualizing sensor data on the dashboard.
-
 ## Future Enhancements
 
 - **pH Monitoring**: Add a pH sensor to track the acidity of the water.
